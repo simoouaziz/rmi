@@ -142,10 +142,9 @@ public class MachineForm extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox2, 0, 175, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtRef)
-                        .addComponent(txtMarque)
-                        .addComponent(txtPrix, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                    .addComponent(txtRef)
+                    .addComponent(txtMarque)
+                    .addComponent(txtPrix, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,8 +178,18 @@ public class MachineForm extends javax.swing.JInternalFrame {
         });
 
         bnUpdate.setText("Modifier");
+        bnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnUpdateActionPerformed(evt);
+            }
+        });
 
         bnDelete.setText("Supprimer");
+        bnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -282,6 +291,45 @@ public class MachineForm extends javax.swing.JInternalFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void bnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnUpdateActionPerformed
+// TODO add your handling code here:
+        String ref= txtRef.getText();
+       String marque = txtMarque.getText();
+       double prix = Double.parseDouble(txtPrix.getText());
+       Salle salle = (Salle) jComboBox2.getSelectedItem();
+        try {
+            if(dao.update(new Machine(id,ref, marque,prix,salle))){
+                JOptionPane.showMessageDialog(this, "Machine a été bien modifié");
+                txtRef.setText("");
+                txtMarque.setText("");
+                jComboBox2.getItemAt(0);
+                load();
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MachineForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                          // TODO add your handling code here:
+    }//GEN-LAST:event_bnUpdateActionPerformed
+
+    private void bnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnDeleteActionPerformed
+  // TODO add your handling code here:
+        if(id != 0){
+            int reponse = JOptionPane.showConfirmDialog(this, "Voulez vous vraiment supprimer cette machine ? ");
+            if(reponse == 0){
+                try {
+                    dao.delete(dao.findById(id));
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MachineForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                load();
+                JOptionPane.showMessageDialog(this, "Machine a été supprimé avec succès !");
+                txtRef.setText("");
+                txtMarque.setText("");
+                jComboBox2.getItemAt(0);               
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_bnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

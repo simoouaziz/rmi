@@ -5,11 +5,20 @@
  */
 package ui;
 
+import entities.Salle;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static sun.font.FontManagerNativeLibrary.load;
+
 /**
  *
  * @author Simo
  */
 public class NewJInternalFrame extends javax.swing.JInternalFrame {
+    private Object txtCode;
+    private Object salles;
 
     /**
      * Creates new form NewJInternalFrame
@@ -64,6 +73,11 @@ public class NewJInternalFrame extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Modifier");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Supprimer");
 
@@ -155,8 +169,26 @@ public class NewJInternalFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+   String code  = txtCode.getText();
+   if(salles.create(new Salle(code))){
+       JOptionPane.showMessageDialog(this, "Bien ajouté");
+       load();
+   }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   // TODO add your handling code here:
+        
+        String code  = txtCode.getText();
+        try {
+            if(salles.update(new Salle(id, code))){
+                JOptionPane.showMessageDialog(this, "Bien modifier");
+                load();
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(SalleForm.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -86,11 +86,9 @@
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jComboBox2" pref="175" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtRef" max="32767" attributes="0"/>
-                          <Component id="txtMarque" max="32767" attributes="0"/>
-                          <Component id="txtPrix" pref="175" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtRef" max="32767" attributes="0"/>
+                      <Component id="txtMarque" max="32767" attributes="0"/>
+                      <Component id="txtPrix" pref="175" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
@@ -208,11 +206,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnUpdateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bnDelete">
           <Properties>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bnDeleteActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
